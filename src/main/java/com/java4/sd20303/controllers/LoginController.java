@@ -13,12 +13,15 @@ import org.apache.commons.beanutils.BeanUtils;
 import com.java4.sd20303.beans.LoginBean;
 import com.java4.sd20303.entities.User;
 import com.java4.sd20303.services.UserServices;
+import com.java4.sd20303.utils.Utils;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String userId = Utils.getCookie(Utils.COOKIE_KEY_USER_ID, req);
 
 		req.getRequestDispatcher("/login.jsp").forward(req, resp);
 	}
@@ -37,11 +40,14 @@ public class LoginController extends HttpServlet {
 				User user = UserServices.login(bean.getUsernameOrEmail(), bean.getPassword());
 				if (user != null) {
 					System.out.println("Đăng nhập thành công");
+
+//					Lưu user_id và role vào cookie với thời hạn: 3 ngày 7 giờ
+
+					Utils.setCookie(Utils.COOKIE_KEY_USER_ID, String.valueOf(user.getId()), resp);
+					Utils.setCookie(Utils.COOKIE_KEY_ROLE, String.valueOf(user.getRole()), resp);
 				} else {
 					System.out.println("Đăng nhập thất bại");
 				}
-
-//				Lưu user_id và role vào cookie với thời hạn: 3 ngày 7 giờ
 			}
 
 		} catch (Exception e) {

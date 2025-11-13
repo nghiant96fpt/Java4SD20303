@@ -88,4 +88,23 @@ public class UserServices {
 		manager.close();
 		return null;
 	}
+
+	public static User getUserInfoById(int id) {
+		EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("dbConnect");
+		EntityManager manager = managerFactory.createEntityManager();
+		try {
+			User user = manager.find(User.class, id);
+
+//			user.getFavourites().get(0).getVideo().getTitle();
+//			user.getVideos().get(0).getComments().size();
+
+			manager.close();
+			return user;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		manager.close();
+		return null;
+	}
 }
