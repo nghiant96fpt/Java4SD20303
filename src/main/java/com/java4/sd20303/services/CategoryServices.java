@@ -175,4 +175,54 @@ public class CategoryServices {
 		manager.close();
 		return null;
 	}
+
+//	Xoá danh mục
+//  - Kiểm tra có video bên trong danh mục không?
+//	- Nếu có thì thông báo lỗi <=> Ngược lại thực hiện xoá 
+
+	public static String deleteCategory(int id) {
+
+		EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("dbConnect");
+		EntityManager manager = managerFactory.createEntityManager();
+
+		try {
+
+//			String sql = "SELECT * FROM fav WHERE user_id=?";
+//			Query query = manager.createNativeQuery(sql, Favourite.class);
+//			
+//			List<Favourite> favourites = query.getResultList();
+//			for(Favourite favourite: favourites) {
+//				favourite.getVideo();
+//			}
+
+			Category category = getInfoById(id);
+
+			if (category == null) {
+				manager.close();
+				return "Lỗi";
+			}
+
+			if (category.getVideos().size() > 0) {
+				manager.close();
+				return "Lỗi";
+			}
+
+			if (!manager.getTransaction().isActive()) {
+				manager.getTransaction().begin();
+			}
+
+			manager.remove(category);
+
+			manager.getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			manager.getTransaction().rollback();
+			manager.close();
+			return e.getMessage();
+		}
+
+		manager.close();
+		return null;
+	}
 }
