@@ -1,5 +1,6 @@
 package com.java4.sd20303.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.java4.sd20303.entities.Category;
@@ -120,14 +121,6 @@ public class VideoServices {
 		return null;
 	}
 
-//	- Xoá
-//    - Kiểm tra video có thuộc sở hữu của user hiện tại không?
-//    - Xoá yêu thích trước
-//    - Xoá bình luận? ??? Có cấp con vô tận 
-//    - Xoá video
-
-//	INPUT: videoId, userId
-
 	public static String deleteVideo(int videoId, int userId) {
 		Video video = getInfoByIdAndUserId(videoId, userId);
 		if (video == null) {
@@ -150,10 +143,6 @@ public class VideoServices {
 
 			manager.remove(video);
 
-//			- Xoá yêu thích trước
-//		    - Xoá bình luận? ??? Có cấp con vô tận 
-//		    - Xoá video
-
 			manager.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -166,7 +155,6 @@ public class VideoServices {
 		return null;
 	}
 
-//	Đệ quy
 	private static void removeComment(List<Comment> comments, EntityManager entityManager) {
 		if (comments.size() == 0) {
 			return;
@@ -176,5 +164,28 @@ public class VideoServices {
 			removeComment(comment.getComments(), entityManager);
 			entityManager.remove(comment);
 		}
+	}
+
+	public static List<Video> getVideos(String title, int catId) {
+		List<Video> videos = new ArrayList<Video>();
+
+		EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("dbConnect");
+		EntityManager manager = managerFactory.createEntityManager();
+
+		try {
+			String sql = "SELECT * FROM videos " + "WHERE (:title IS NULL OR :title = '' OR title LIKE :search) "
+					+ "AND (:catId = 0 OR cat_id = :catId)";
+			Query query = manager.createNativeQuery(sql, Video.class);
+			query.setParameter("title", title);
+			query.setParameter("catId", catId);
+			query.setParameter("search", "%" + title == null ? "" : title + "%");
+
+			videos = query.getResultList();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return videos;
 	}
 }

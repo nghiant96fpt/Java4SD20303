@@ -63,3 +63,28 @@ public class Video {
 	@OneToMany(mappedBy = "video")
 	private List<Favourite> favourites;
 }
+
+// 1 = Hiển thị
+// 2 = Ẩn 
+// 3 = Từ chối
+// 4 = Duyệt
+
+// TH == 1
+// - Editer (Chờ duyệt)
+// - Admin (Chờ duyệt)
+// - User || Home (Không hiển thị)
+
+// TH == 2
+// - Editer (Video ẩn)
+// - Admin (Không hiển thị)
+// - User || Home (Không hiển thị)
+
+// TH == 3
+// - Editer (Video từ chối)
+// - Admin (Video từ chối)
+// - User || Home (Không hiển thị)
+
+// TH == 4
+//- Editer (Video đã duyệt)
+//- Admin (Video đã duyệt)
+//- User || Home (Hiển thị)
