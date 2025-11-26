@@ -13,11 +13,11 @@
 	<div class="container">
 		<div class="col-6 offset-3">
 			<form method="POST"
-				action="${pageContext.request.contextPath}"
+				action="${pageContext.request.contextPath}/editer/video-form"
 				enctype="multipart/form-data">
 				<div class="mb-3">
 				  <label for="exampleFormControlInput1" class="form-label">Tiêu đề</label>
-				  <input name="title" type="text" class="form-control">
+				  <input value="${bean.title}" name="title" type="text" class="form-control">
 				</div>
 				
 				<div class="mb-3">
@@ -32,13 +32,16 @@
 				
 				<div class="mb-3">
 				  <label for="exampleFormControlInput1" class="form-label">Url</label>
-				  <input name="url" type="text" class="form-control">
+				  <input value="${bean.url}" name="url" type="text" class="form-control">
 				</div>
 				
 				<div class="mb-3">
 				  <label for="exampleFormControlInput1" class="form-label">Danh mục video</label>
 				  <select name="category" class="form-select" aria-label="Default select example">
 					  <option value="0">----Chọn danh mục------</option>
+					  <c:forEach items="${categories}" var="item">
+					  	<option value="${item.id}">${item.name}</option>
+					  </c:forEach>
 				</select>
 				</div>
 				

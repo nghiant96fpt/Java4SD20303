@@ -64,7 +64,7 @@ public class CategoryServices {
 
 //			"Laptop     Dell" => ["Laptop", "Dell"] => slipt
 
-			String[] nameArr = name.split("//s+");
+			String[] nameArr = name.split("\\s+");
 
 //			["Laptop", "Dell"] => "Laptop Dell" => "laptop dell"
 

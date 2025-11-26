@@ -36,6 +36,13 @@ public class VideoFormBean {
 	private int category;
 	private int status;
 
+//	Nếu url này không tồn tại thì hiển thị video mặc định
+//	public String getUrl() {
+//		return url == null ? "" : url;
+//	}
+
+//	getUrl != null ? getUrl : "abc"
+
 	public Map<String, String> getErrors() {
 		Map<String, String> map = new HashMap<String, String>();
 
@@ -43,18 +50,18 @@ public class VideoFormBean {
 	}
 
 	public void setTitle(String title) {
-		this.title = String.join(" ", title.trim().split("//s+"));
+		this.title = String.join(" ", title.trim().split("\\s+"));
 	}
 
 	public void setDesc(String desc) {
-		this.desc = String.join(" ", desc.trim().split("//s+"));
+		this.desc = String.join(" ", desc.trim().split("\\s+"));
 	}
 
 	public String getTitle() {
-		return String.join(" ", this.title.trim().split("//s+"));
+		return String.join(" ", this.title.trim().split("\\s+"));
 	}
 
 	public String getDesc() {
-		return String.join(" ", this.desc.trim().split("//s+"));
+		return String.join(" ", this.desc.trim().split("\\s+"));
 	}
 }
