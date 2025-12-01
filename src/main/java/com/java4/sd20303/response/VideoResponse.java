@@ -14,8 +14,33 @@ public class VideoResponse {
 	private String url;
 	private String authName;
 	private String catName;
-	private int status;
+	private String status;
+
+//	enum 
+
+//	Có hàm setStatus nhận dữ liệu đầu vào int 
+//	Dựa vào gía trị int set giá trị STring lại cho status
+
+	public void setStatus(int status) {
+		switch (status) {
+		case 1:
+			this.status = "Chờ duyệt";
+		case 2:
+			this.status = "Ẩn";
+		case 3:
+			this.status = "Từ chối";
+		case 4:
+			this.status = "Đã duyệt";
+		default:
+			this.status = "Chờ duyệt";
+		}
+	}
 }
+
+//1 = Chờ duyệt => Cho duyệt
+//2 = Ẩn => HIDE
+//3 = Từ chối
+//4 = Duyệt
 
 //- Id
 //- Tên
