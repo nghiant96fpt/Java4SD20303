@@ -54,13 +54,6 @@ public class VideoFormController extends HttpServlet {
 			req.setAttribute("bean", bean);
 
 			if (bean.getErrors().isEmpty()) {
-//				Lưu ảnh vào project => name *****
-//				Chuyển đổi từ bean qua entity
-//				Gọi services để insert video 
-
-//				image/png, image/jpg,...
-
-//				UUID => 32bit 
 				String type = bean.getImage().getContentType().split("/")[1];
 				String name = String.valueOf(new Date().getTime()) + "." + type;
 				String path = "/assets/images/" + name;
@@ -97,3 +90,14 @@ public class VideoFormController extends HttpServlet {
 		req.getRequestDispatcher("/video-form.jsp").forward(req, resp);
 	}
 }
+
+// Danh sách => Xoá video => Danh sách 
+
+// Chuyển qua xây dựng 2 chức năng (API)
+// - Danh sách video
+// - Xoá video 
+
+// Danh sách
+// - Gọi API danh sách video => js để hiển thị lên giao diện
+// - Xoá gọi api xoá => gọi tiếp api danh sách 
+//=> js để cập nhật giao diện 

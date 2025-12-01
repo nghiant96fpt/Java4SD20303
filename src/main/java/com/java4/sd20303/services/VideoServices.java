@@ -188,4 +188,26 @@ public class VideoServices {
 
 		return videos;
 	}
+
+	public static List<Video> getVideoListByUserId(int userId) {
+		List<Video> videos = new ArrayList<Video>();
+
+		EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("dbConnect");
+		EntityManager manager = managerFactory.createEntityManager();
+
+		try {
+			String sql = "SELECT * FROM videos WHERE user_id=?1";
+
+			Query query = manager.createNativeQuery(sql, Video.class);
+			query.setParameter(1, userId);
+
+			videos = query.getResultList();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		manager.close();
+		return videos;
+	}
 }

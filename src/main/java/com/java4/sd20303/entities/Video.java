@@ -31,7 +31,7 @@ public class Video {
 	@Column(name = "title", nullable = false, columnDefinition = "NTEXT")
 	private String title;
 
-	@Column(name = "desc", nullable = false, columnDefinition = "NTEXT")
+	@Column(name = "content", nullable = false, columnDefinition = "NTEXT")
 	private String desc;
 
 	@Column(name = "url", nullable = false, length = 255)
