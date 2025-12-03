@@ -27,7 +27,7 @@
 		      <th scope="col">Hành động</th>
 		    </tr>
 		  </thead>
-		  <tbody id="bodyTable">
+		  <tbody id="bodyTable" data-context-path="${pageContext.request.contextPath}">
 		  	
 		  </tbody>
 		</table>
@@ -42,13 +42,22 @@
 		/* axios.post() */
 		
 		/* Chuẩn ES6: arrow function */
-		const getData = async () => {
+		/* const getData = async () => {
 			try{
-				const data = await axios.get("/Java4SD20303/api/videos");
-				console.log(data.data);
-				/* data.data => array => js cơ bản để gán dữ liệu từ mảng vào tbody html  */
-				
 				const bodyTable = document.getElementById("bodyTable");
+				
+				const contextPath = bodyTable.getAttribute("data-context-path");
+				
+				const data = await axios.get(contextPath + "/api/videos");
+				console.log(data.data);
+				
+				const data1 = await axios.get(contextPath + "/api/videos");
+				console.log(data1.data);
+				
+				const data2 = await axios.get(contextPath + "/api/videos");
+				console.log(data2.data);
+				
+				
 				
 				let html = "";
 				
@@ -63,17 +72,6 @@
 					      "<td>" + item.status + "</th>" +
 					      "<td>Hành động</th>" +
 					    "</tr>";
-					    
-					/* html += `<tr>
-					      <th>${item.id}</th>
-					      <td>${item.name}</th>
-					      <td>${item.image}</th>
-					      <td>${item.url}</th>
-					      <td>${item.authName}</th>
-					      <td>${item.catName}</th>
-					      <td>${item.status}</th>
-					      <td>Hành động</th>
-					    </tr>`; */
 				});
 				
 				bodyTable.innerHTML = html;
@@ -81,6 +79,43 @@
 			}catch(err){
 				console.log(err);
 			}
+		} */
+		
+		const getData = () => {
+			const bodyTable = document.getElementById("bodyTable");
+			
+			const contextPath = bodyTable.getAttribute("data-context-path");
+			
+			axios.get(contextPath + "/api/videos")
+			.then(res=>{
+				console.log(res.data);
+				let html = "";
+				
+				res.data.forEach((item)=>{
+					html += "<tr>" +
+					      "<th>" + item.id + "</th>" +
+					      "<td>" + item.name + "</th>" +
+					      "<td>" + item.image + "</th>" +
+					      "<td>" + item.url + "</th>" +
+					      "<td>" + item.authName + "</th>" +
+					      "<td>" + item.catName + "</th>" +
+					      "<td>" + item.status + "</th>" +
+					      "<td>" +
+					      	"<button onclick='deleteVideo(" + item.id + ");' class='btn btn-danger'>Xoá video</button>" +
+					      "</th>" +
+					    "</tr>";
+				});
+				
+				bodyTable.innerHTML = html;
+			})
+			.catch(err=>{
+				console.log(err);
+			});
+			
+		}
+		
+		function deleteVideo(id){
+			console.log(id);
 		}
 		
 		getData();

@@ -19,6 +19,26 @@ import com.java4.sd20303.utils.Utils;
 
 @WebServlet("/api/videos")
 public class VideoListApi extends HttpServlet {
+
+//	PUT || PATCH
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doPut(req, resp);
+	}
+
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doDelete(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doPost(req, resp);
+	}
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setCharacterEncoding("utf-8");
@@ -46,6 +66,12 @@ public class VideoListApi extends HttpServlet {
 			videoResponse.setStatus(video.getStatus());
 
 			videoResponses.add(videoResponse);
+		}
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 
 		Gson gson = new GsonBuilder().serializeNulls().create();
