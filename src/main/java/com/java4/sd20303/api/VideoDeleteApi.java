@@ -19,6 +19,8 @@ public class VideoDeleteApi extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setCharacterEncoding("utf-8");
+		resp.setContentType("application/json");
 		String videoId = req.getParameter("videoId");
 		VideoDeleteResponse videoDeleteResponse = new VideoDeleteResponse();
 		Gson gson = new GsonBuilder().serializeNulls().create();

@@ -114,8 +114,34 @@
 			
 		}
 		
-		function deleteVideo(id){
-			console.log(id);
+		async function deleteVideo(id){
+			if(confirm("Ban co muon xoa video khong?")){
+				try{
+					const bodyTable = document.getElementById("bodyTable");
+					const contextPath = bodyTable.getAttribute("data-context-path");
+					let config = {
+					  method: 'post',
+					  url: contextPath + '/api/video-delete',
+					  headers: { 
+					    'Content-Type': 'application/x-www-form-urlencoded'
+					  },
+					  data : {
+						  "videoId": id
+					  }
+					};
+
+					const response = await axios.request(config);
+					console.log(JSON.stringify(response.data));
+					  
+					alert(response.data.message);
+					  
+					if(response.data.status){
+						getData();
+					}
+				}catch(e){
+					console.log(e)
+				}
+			}
 		}
 		
 		getData();

@@ -141,7 +141,9 @@ public class VideoServices {
 
 			removeComment(video.getComments(), manager);
 
-			manager.remove(video);
+//			New Code
+			Video managedVideo = manager.merge(video);
+			manager.remove(managedVideo);
 
 			manager.getTransaction().commit();
 		} catch (Exception e) {

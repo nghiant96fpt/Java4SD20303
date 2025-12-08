@@ -57,10 +57,10 @@ public class Video {
 	@JoinColumn(name = "cat_id")
 	private Category category;
 
-	@OneToMany(mappedBy = "video")
+	@OneToMany(mappedBy = "video", fetch = FetchType.EAGER)
 	private List<Comment> comments;
 
-	@OneToMany(mappedBy = "video")
+	@OneToMany(mappedBy = "video", fetch = FetchType.EAGER)
 	private List<Favourite> favourites;
 }
 

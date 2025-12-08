@@ -1,6 +1,5 @@
 package com.java4.sd20303.entities;
 
-import java.sql.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -30,9 +29,6 @@ public class Comment {
 	@Column(name = "content", nullable = false, columnDefinition = "NVARCHAR(255)")
 	private String content;
 
-	@Column(name = "image", nullable = true, length = 255)
-	private String image;
-
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -40,9 +36,6 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name = "video_id")
 	private Video video;
-
-	@Column(name = "create_at", nullable = false)
-	private Date createAt;
 
 	@Column(name = "status", nullable = false)
 	private int status;

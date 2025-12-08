@@ -68,11 +68,11 @@ public class VideoListApi extends HttpServlet {
 			videoResponses.add(videoResponse);
 		}
 
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Thread.sleep(10000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 
 		Gson gson = new GsonBuilder().serializeNulls().create();
 		resp.getWriter().print(gson.toJson(videoResponses));
